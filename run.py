@@ -1,5 +1,7 @@
 # functionality
 import os
+import database
+from models import test
 
 # discord
 import discord
@@ -34,6 +36,8 @@ class Cogs(commands.Cog):
 async def on_ready(): #wrong syntax?
     if int(os.getenv('DEBUG_LEVEL')) >= 1:
         print("debug: on_ready() ran")
+        # print(database.test_query())
+        print(test.test_query())
     
     await bot.add_cog(Cogs(bot))
 

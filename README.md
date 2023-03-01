@@ -1,2 +1,5 @@
 # discord-policy-bot
-Systematic handling of a comprehensive config to create life-like rpgs on discord :)
+Systematic handling of a comprehensive config to create life-like discord servers :)
+
+**Code Style?**\
+MVC
