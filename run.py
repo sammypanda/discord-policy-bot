@@ -24,21 +24,16 @@ class Cogs(commands.Cog):
         self.bot = bot
         self._last_member = None
 
-    @commands.Cog.listener()
-    async def on_message(self, ctx):
-        if int(os.getenv('DEBUG_LEVEL')) >=2:
-            print(f'ctx: {ctx}')
+    @commands.slash_command(name="objects", description="output items to interact with")
+    async def sample(self, ctx, section=""):
+        if (section == "" or section == "ctx"):
+            await ctx.respond(f"ctx objects: {dir(ctx)}") # using ctx.send will cause 'application did not respond'
+        else:
+            await ctx.respond(f"object not found")
 
-        if ctx.author.bot is False:
-            await ctx.author.guild.system_channel.send(f'no! i do the test {ctx.author}')
-
-    @commands.command()
-    async def hello(self, ctx):
-        await ctx.send(f'hai {ctx.author.name}')
-
-    @commands.slash_command(name="hello", description="simple slash command implement")
-    async def _slash_hello(self, ctx):
-        await ctx.respond("diffy approach") # using ctx.send will cause 'application did not respond'
+    @commands.slash_command(name="setup", description="creates the setup channel")
+    async def setup_channel(self, ctx):
+        print(ctx.new)
 
 @bot.event
 async def on_ready():
