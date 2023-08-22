@@ -2,9 +2,8 @@
 from models.manager_model import ManagerModel
 from controllers.manager_controller import ManagerController
 
-_console = ManagerModel() # instantiate a private manager_model just for console/server admin
-_bot = _console.get_bot() # private variable for "managing" the ongoing bot instance
+_console = ManagerController() # instantiate a private controller just for console/server admin
 
 # Setup 
-manager = ManagerController(_bot) # instantiate the manager commands
-_console.run_bot(_bot) # instantiate the bot
+manager = _console.commands() # instantiate the manager commands (client-side manager)
+_console.run_bot() # instantiate the bot after registering handlers
