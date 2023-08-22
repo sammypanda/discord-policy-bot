@@ -6,6 +6,9 @@ class ManagerController:
         self._commands(bot)
         self.manager_model = ManagerModel()
 
+    def run_bot(self):
+        self.manager_model.bot(bot)
+
     def _commands(self, bot):
         @bot.hybrid_command()
         async def objects(ctx, section=""): # output to discord chat the objects in Context
