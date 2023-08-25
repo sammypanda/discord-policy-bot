@@ -3,6 +3,7 @@ import os
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
+from controllers.generator_controller import GeneratorController
 
 load_dotenv() # import dotenv values
 
@@ -12,6 +13,7 @@ class ManagerModel:
         # TODO: run checks to see if important env variables are set/set defaults
         self.intents = discord.Intents.all() # declare that the bot can do anything it wants!
         self.bot = commands.Bot(command_prefix='!', intents=self.intents) # bot instantiate/config
+        self.generator = GeneratorController()
 
     def get_bot(self):
         return self.bot
@@ -19,9 +21,8 @@ class ManagerModel:
     def run_bot(self):
         @self.bot.event
         async def on_ready():
-            if int(os.getenv('DEBUG_LEVEL')) >= 1:
-                print("debug: on_ready() ran")
-                print(self.test_query())
+            self.generator.log(1, "debug: on_ready() ran")
+            self.generator.log(1, self.test_query())
 
         self.bot.run(os.getenv('BOT_TOKEN'))
 
